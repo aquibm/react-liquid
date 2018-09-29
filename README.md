@@ -18,11 +18,9 @@ import React, { Component } from 'react'
 import MyComponent from 'react-liquid'
 
 class Example extends Component {
-  render () {
-    return (
-      <MyComponent />
-    )
-  }
+    render() {
+        return <MyComponent />
+    }
 }
 ```
 
