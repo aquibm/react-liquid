@@ -56,5 +56,8 @@
     },
     "files": [
         "dist"
-    ]
+    ],
+    "dependencies": {
+        "liquidjs": "^6.0.0"
+    }
 }
