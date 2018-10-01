@@ -1,5 +1,4 @@
 import ReactLiquid from './components/ReactLiquid'
-import ReactLiquidConfig from './components/ReactLiquidConfig'
+import { ReactLiquidConfig, liquidEngine } from './components/ReactLiquidConfig'
 
-export default ReactLiquid
-export { ReactLiquid, ReactLiquidConfig }
+export { ReactLiquid, ReactLiquidConfig, liquidEngine }
