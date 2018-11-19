@@ -1,8 +1,12 @@
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { ReactLiquidConfigProvider } from './ReactLiquidConfig'
 
-class ReactLiquid extends Component {
+/**
+ * Responsible for consuming template + data and rendering the result of
+ * the Liquid engine.
+ */
+class ReactLiquid extends PureComponent {
     static propTypes = {
         template: PropTypes.string.isRequired,
         data: PropTypes.object.isRequired,
@@ -10,28 +14,55 @@ class ReactLiquid extends Component {
     }
 
     state = {
-        currentTemplate: undefined,
+        template: undefined,
+        data: undefined,
         compiledRender: undefined,
+        needsRender: true,
+    }
+
+    /**
+     * Determines whether the rendered value is outdated and needs to be re-rendered.
+     * Only re-renders if the template or data change.
+     *
+     * @param {*} props
+     * @param {*} state
+     */
+    static getDerivedStateFromProps(props, state) {
+        if (props.template !== state.template || props.data !== state.data) {
+            return {
+                template: props.template,
+                data: props.data,
+                compiledRender: state.compiledRender,
+                needsRender: true,
+            }
+        }
+
+        return null
     }
 
     async componentDidMount() {
         await this.parseAndRender()
     }
 
-    async componentWillUpdate() {
-        const { template } = this.props
-        const { currentTemplate } = this.state
+    /**
+     * Re-renders the value if required.
+     */
+    async componentDidUpdate() {
+        const { needsRender } = this.state
 
-        if (template !== currentTemplate) {
+        if (needsRender) {
             await this.parseAndRender()
         }
     }
 
+    /**
+     * Parses and renders the liquid template with the specified data.
+     */
     async parseAndRender() {
         const { template, data, liquidEngine } = this.props
 
         const compiledRender = await liquidEngine.parseAndRender(template, data)
-        this.setState({ compiledRender, currentTemplate: template })
+        this.setState({ compiledRender, template, data, needsRender: false })
     }
 
     render() {
