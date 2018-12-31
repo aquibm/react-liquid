@@ -2,7 +2,7 @@
 
 > Liquid templating language component for React
 
-[![NPM](https://img.shields.io/npm/v/react-liquid.svg)](https://www.npmjs.com/package/react-liquid) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-liquid.svg)](https://www.npmjs.com/package/react-liquid)
 
 ## Install
 
@@ -10,20 +10,57 @@
 npm install --save react-liquid
 ```
 
-## Usage
+or
+
+```bash
+yarn add react-liquid
+```
+
+## Basic Usage
+
+The component will automatically update when template or data are updated via state or props.
 
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'react-liquid'
+import { ReactLiquid } from 'react-liquid'
 
 class Example extends Component {
     render() {
-        return <MyComponent />
+        const template = 'Hello, {{ name }}'
+        const data = {
+            name: 'aquibm',
+        }
+
+        return <ReactLiquid template={template} data={data} />
+    }
+}
+```
+
+## Extending the Liquid Engine
+
+You can add your own filters and tags to the liquid engine, [more information here.](https://github.com/harttle/liquidjs#register-filters)
+
+```jsx
+import React, { Component } from 'react'
+
+import { ReactLiquid, liquidEngine } from 'react-liquid'
+
+class Example extends Component {
+    constructor(props) {
+        super(props)
+
+        liquidEngine.registerFilter('add', (initial, arg1, arg2) => {
+            return initial + arg1 + arg2
+        })
+    }
+
+    render() {
+        return <ReactLiquid template="{{ 1 | add: 2, 3 }}" />
     }
 }
 ```
 
 ## License
 
-MIT © [aquibm](https://github.com/aquibm)
+[MIT](LICENSE.md) © Aquib Master
