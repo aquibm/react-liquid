@@ -2,7 +2,7 @@
     "name": "react-liquid",
     "version": "1.0.0",
     "description": "Liquid templating language component for React",
-    "author": "aquibm",
+    "author": "Aquib Master",
     "license": "MIT",
     "repository": "aquibm/react-liquid",
     "main": "dist/index.js",
