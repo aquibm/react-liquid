@@ -9,8 +9,9 @@ import { ReactLiquidConfigProvider } from './ReactLiquidConfig'
 class ReactLiquid extends PureComponent {
     static propTypes = {
         template: PropTypes.string.isRequired,
-        data: PropTypes.object.isRequired,
+        data: PropTypes.object,
         liquidEngine: PropTypes.object.isRequired,
+        html: PropTypes.bool,
     }
 
     state = {
@@ -65,7 +66,16 @@ class ReactLiquid extends PureComponent {
         this.setState({ compiledRender, template, data, needsRender: false })
     }
 
+    _createHtmlRender = () => {
+        const { compiledRender } = this.state
+        return { __html: compiledRender }
+    }
+
     render() {
+        if (this.props.html) {
+            return <div dangerouslySetInnerHTML={this._createHtmlRender()} />
+        }
+
         const { compiledRender } = this.state
         return <Fragment>{compiledRender}</Fragment>
     }
