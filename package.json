@@ -1,6 +1,6 @@
 {
     "name": "react-liquid",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Liquid templating language component for React",
     "author": "Aquib Master",
     "license": "MIT",
