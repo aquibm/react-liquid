@@ -41,6 +41,13 @@ export default class App extends Component {
 
                 <br />
                 <ReactLiquid template="{{ 1 | add: 2, 3 }}" />
+
+                <br />
+                <ReactLiquid
+                    template="<p style='color: tomato;'>{{ name }}</p>"
+                    data={data}
+                    html
+                />
             </div>
         )
     }
