@@ -12,6 +12,7 @@ class ReactLiquid extends PureComponent {
         data: PropTypes.object,
         liquidEngine: PropTypes.object.isRequired,
         html: PropTypes.bool,
+        render: PropTypes.func,
     }
 
     state = {
@@ -72,8 +73,14 @@ class ReactLiquid extends PureComponent {
     }
 
     render() {
-        if (this.props.html) {
+        const { html, render } = this.props
+
+        if (html) {
             return <div dangerouslySetInnerHTML={this._createHtmlRender()} />
+        }
+
+        if (render) {
+            return render(this._createHtmlRender())
         }
 
         const { compiledRender } = this.state
