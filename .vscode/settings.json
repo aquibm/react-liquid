@@ -9,10 +9,5 @@
         "**/node_modules/": true
     },
 
-    //   Prettier
-    "prettier.semi": false,
-    "prettier.singleQuote": true,
-    "prettier.tabWidth": 4,
-    "prettier.trailingComma": "all",
     "editor.formatOnSave": true
 }
