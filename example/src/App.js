@@ -48,6 +48,23 @@ export default class App extends Component {
                     data={data}
                     html
                 />
+
+                <br />
+                <ReactLiquid
+                    template="<p style='color: rebeccapurple;'>{{ name }}</p>"
+                    data={data}
+                    render={renderedTemplate => {
+                        console.log('Template rendered!')
+
+                        return (
+                            <ul>
+                                <li
+                                    dangerouslySetInnerHTML={renderedTemplate}
+                                ></li>
+                            </ul>
+                        )
+                    }}
+                />
             </div>
         )
     }
