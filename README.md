@@ -82,6 +82,35 @@ class Example extends Component {
 }
 ```
 
+## Custom rendering via render prop
+
+You can render however you'd like by passing through a render prop
+
+```jsx
+import React, { Component } from 'react'
+import { ReactLiquid } from 'react-liquid'
+
+class Example extends Component {
+    render() {
+        const template = '<p style="color: tomato;">{{ name }}</p>'
+        const data = {
+            name: 'aquibm',
+        }
+
+        return (
+            <ReactLiquid
+                template={template}
+                data={data}
+                render={renderedTemplate => {
+                    console.log('Woohoo! New Render!')
+                    return <span dangerouslySetInnerHTML={renderedTemplate} />
+                }}
+            />
+        )
+    }
+}
+```
+
 ## License
 
 [MIT](LICENSE.md) © Aquib Master
