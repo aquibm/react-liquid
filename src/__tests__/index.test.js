@@ -1,14 +1,14 @@
 import React from 'react'
-import { configure, mount, shallow } from 'enzyme'
+import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-import { ReactLiquid, liquidEngine } from '.'
+import { ReactLiquid } from '../index'
 
 configure({ adapter: new Adapter() })
 
 describe('ReactLiquid tests', () => {
     const wait = () =>
-        new Promise(resolve => {
+        new Promise((resolve) => {
             setTimeout(() => resolve(), 500)
         })
 
@@ -81,7 +81,7 @@ describe('ReactLiquid tests', () => {
             <ReactLiquid
                 template={template}
                 data={data}
-                render={renderedTemplate => (
+                render={(renderedTemplate) => (
                     <p dangerouslySetInnerHTML={renderedTemplate}></p>
                 )}
             />,
