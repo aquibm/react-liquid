@@ -123,7 +123,7 @@ class Example extends Component {
 
 From version 2.x onwards, you can render markdown using the useLiquid hook.
 
-> At the moment, we use `JSON.stringify( data )` between render cycles to determine whether we need to re-render the markdown. This is inherently slow and should only be used when data is small and not overly nested.
+> At the moment, we use `JSON.stringify( data )` between render cycles to determine whether we need to re-render the markdown. This is inherently slow and should only be used when data is small and not overly nested. [Read more here](https://twitter.com/dan_abramov/status/1104414272753487872)
 
 ```jsx
 import React from 'react'
