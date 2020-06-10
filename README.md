@@ -4,6 +4,14 @@
 
 [![NPM](https://img.shields.io/npm/v/react-liquid.svg)](https://www.npmjs.com/package/react-liquid)
 
+-   [Install](#install)
+-   [Basic Usage](#basic-usage)
+-   [Extending the Liquid Engine](#extending-the-liquid-engine)
+-   [Rendering HTML](#rendering-html)
+-   [Custom rendering via render prop](#custom-rendering-via-render-prop)
+-   [useLiquid hook](#useliquid-hook)
+-   [License](#license)
+
 ## Install
 
 ```bash
@@ -101,13 +109,35 @@ class Example extends Component {
             <ReactLiquid
                 template={template}
                 data={data}
-                render={renderedTemplate => {
+                render={(renderedTemplate) => {
                     console.log('Woohoo! New Render!')
                     return <span dangerouslySetInnerHTML={renderedTemplate} />
                 }}
             />
         )
     }
+}
+```
+
+## useLiquid hook
+
+From version 2.x onwards, you can render markdown using the useLiquid hook.
+
+> At the moment, we use `JSON.stringify( data )` between render cycles to determine whether we need to re-render the markdown. This is inherently slow and should only be used when data is small and not overly nested.
+
+```jsx
+import React from 'react'
+import { useLiquid, RENDER_STATUS } from 'react-liquid'
+
+const MyAwesomeComponent = ({ template, data }) => {
+    const { status, markup } = useLiquid(template, data)
+
+    return (
+        <div>
+            {status === RENDER_STATUS.rendering && <div>Rendering...</div>}
+            <div dangerouslySetInnerHTML={{ __html: markup }} />
+        </div>
+    )
 }
 ```
 
